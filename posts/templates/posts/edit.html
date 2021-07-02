@@ -1,0 +1,33 @@
+{% extends "posts/detail.html" %}
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'editormd/css/editormd.min.css' %}"/>
+{% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'editormd/editormd.min.js' %}"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#id_title").addClass("form-control");
+            $("#id_text").wrap("<div id='editor'></div>").parent();
+            var editor = editormd("editor", {
+                {#width: "100%",#}
+                height: "400px",
+                {#markdown: "xxxx",     // dynamic set Markdown text#}
+                path: "{% static 'editormd/lib/' %}"  // Autoload modules mode, codemirror, marked... dependents libs path
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-default" type="submit" value="保存">
+        <a class="btn btn-default" onclick="window.history.back()">返回</a>
+    </form>
+{% endblock %}
+
