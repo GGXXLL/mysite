@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from posts.views import PostIndexView
+
 urlpatterns = [
+    path('', PostIndexView.as_view()),
     path('admin/', admin.site.urls),
     path('posts/', include("posts.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
