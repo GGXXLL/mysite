@@ -4,6 +4,7 @@
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'editormd/css/editormd.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'posts/edit.css' %}"/>
 {% endblock %}
 {% block js %}
     {{ block.super }}
@@ -13,6 +14,7 @@
         $(function () {
             $("#id_title").addClass("form-control");
             $("#id_text").wrap("<div id='editor'></div>").parent();
+            $("#id_part").addClass("form-control");
             var editor = editormd("editor", {
                 {#width: "100%",#}
                 height: "400px",

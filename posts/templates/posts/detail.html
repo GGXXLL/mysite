@@ -44,17 +44,9 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false">{% firstof user.get_short_name user.get_username %}<span
-                                class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'logout' %}">退出登录</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                {% block user %}
+                    {{ block.super }}
+                {% endblock %}
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -71,8 +63,11 @@
         </textarea>
     </div>
 
-<a class="btn btn-default" href="{% url 'posts:edit' post.pk %}">编辑</a>
-<a class="btn btn-default" onclick="window.history.back()">返回</a>
+    {% if post.author == user %}
+        <a class="btn btn-default" href="{% url 'posts:edit' post.pk %}">编辑</a>
+    {% endif %}
+
+    <a class="btn btn-default" onclick="window.history.back()">返回</a>
 
 {% endblock %}
 

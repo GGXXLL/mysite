@@ -11,7 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['part', 'title', 'text']}),
     ]
-    list_display = ('id', 'part', 'title', 'edit_date', 'pub_date', 'was_published_recently', 'is_delete', 'examine')
+    list_display = ('id', 'part', 'author', 'title', 'edit_date', 'pub_date', 'was_published_recently', 'is_delete', 'examine')
     list_filter = ['part__name', 'pub_date', 'is_delete', 'examine']
     search_fields = ['title', ]
     list_editable = ['examine', 'is_delete']
@@ -20,6 +20,9 @@ class PostAdmin(admin.ModelAdmin):
         for i in queryset:
             i.is_delete = True
             i.save()
+
+    def save_model(self, request, obj, form, change):
+        obj.save()
 
 
 class CommentAdmin(admin.ModelAdmin):

@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib import admin
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -35,6 +36,7 @@ class Post(models.Model):
     edit_date = models.DateTimeField(verbose_name='编辑日期', default=timezone.now)
     examine = models.IntegerField(verbose_name='审核状态', default=1, choices=Examine.choices)
     is_delete = models.BooleanField(verbose_name='被删除？', default=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者', null=False)
 
     def __str__(self):
         return self.title

@@ -22,5 +22,6 @@ urlpatterns = [
     path('', PostIndexView.as_view()),
     path('admin/', admin.site.urls),
     path('posts/', include("posts.urls")),
+    path('users/', include("users.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -1,0 +1,49 @@
+{% extends "registration/login.html" %}
+
+{% block form %}
+
+    {% if form.errors %}
+        <p>Your username is existed. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'users:register' %}" class="simpleui-form" id="login-form">
+        {% csrf_token %}
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-user" v-model="username" name="email" placeholder="用户名" autofocus></el-input>
+        </div>
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-lock" v-model="username" name="password" placeholder="密码"
+                      autofocus></el-input>
+        </div>
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-lock" v-model="username" name="password2" placeholder="密码确认"
+                      autofocus></el-input>
+        </div>
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-user" v-model="username" name="last_name" placeholder="姓"
+                      autofocus></el-input>
+        </div>
+        <div class="simpleui-input-inline">
+            <el-input prefix-icon="fas fa-user" v-model="username" name="first_name" placeholder="名"
+                      autofocus></el-input>
+        </div>
+        <div class="simpleui-input-inline login-btn">
+            <el-button :icon="loading?'el-icon-loading':''" value="注册"
+                       type="submit">注册
+            </el-button>
+        </div>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    <div class="simpleui-input-inline login-btn">
+        <el-button onclick="window.history.back()">返回</el-button>
+    </div>
+{% endblock %}
