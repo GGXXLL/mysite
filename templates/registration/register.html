@@ -1,9 +1,12 @@
 {% extends "registration/login.html" %}
+{% load i18n static simpletags %}
+{% block head %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+{% endblock %}
 
 {% block form %}
-
     {% if form.errors %}
-        <p>Your username is existed. Please try again.</p>
+        <p>{{ form.errors }}</p>
     {% endif %}
 
     {% if next %}
@@ -18,27 +21,27 @@
     <form method="post" action="{% url 'users:register' %}" class="simpleui-form" id="login-form">
         {% csrf_token %}
         <div class="simpleui-input-inline">
-            <el-input prefix-icon="fas fa-user" v-model="username" name="email" placeholder="用户名" autofocus></el-input>
+            <el-input prefix-icon="fas fa-user" v-model="username" name="email" placeholder="邮箱" autofocus></el-input>
         </div>
         <div class="simpleui-input-inline">
-            <el-input prefix-icon="fas fa-lock" v-model="username" name="password" placeholder="密码"
+            <el-input prefix-icon="fas fa-lock" v-model="password" name="password" placeholder="密码"
                       autofocus></el-input>
         </div>
         <div class="simpleui-input-inline">
-            <el-input prefix-icon="fas fa-lock" v-model="username" name="password2" placeholder="密码确认"
+            <el-input prefix-icon="fas fa-lock" v-model="password2" name="password2" placeholder="密码确认"
                       autofocus></el-input>
         </div>
         <div class="simpleui-input-inline">
-            <el-input prefix-icon="fas fa-user" v-model="username" name="last_name" placeholder="姓"
+            <el-input prefix-icon="fas fa-user" v-model="last_name" name="last_name" placeholder="姓"
                       autofocus></el-input>
         </div>
         <div class="simpleui-input-inline">
-            <el-input prefix-icon="fas fa-user" v-model="username" name="first_name" placeholder="名"
+            <el-input prefix-icon="fas fa-user" v-model="first_name" name="first_name" placeholder="名"
                       autofocus></el-input>
         </div>
         <div class="simpleui-input-inline login-btn">
-            <el-button :icon="loading?'el-icon-loading':''" value="注册"
-                       type="submit">注册
+            <el-button :icon="loading?'el-icon-loading':''" @click="createUser()"
+                       type="primary">注册
             </el-button>
         </div>
         <input type="hidden" name="next" value="{{ next }}">
@@ -46,4 +49,9 @@
     <div class="simpleui-input-inline login-btn">
         <el-button onclick="window.history.back()">返回</el-button>
     </div>
+{% endblock %}
+
+
+{% block login_js %}
+    <script type="text/javascript" src="{% static 'users/register.js' %}"></script>
 {% endblock %}

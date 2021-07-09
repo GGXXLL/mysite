@@ -10,7 +10,7 @@ from django.views import generic
 from .models import Post, Comment, Part, Examine
 
 
-class PostIndexView(LoginRequiredMixin, generic.ListView):
+class PostIndexView(generic.ListView):
     template_name = 'posts/index.html'
     context_object_name = 'post_list'
     paginate_by = 10
@@ -81,7 +81,7 @@ class PostSelfView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-class PostDetailView(LoginRequiredMixin, generic.DetailView):
+class PostDetailView(generic.DetailView):
     model = Post
     template_name = 'posts/detail.html'
 
