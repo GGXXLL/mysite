@@ -1,6 +1,10 @@
 {% extends "posts/detail.html" %}
 {% load static %}
 
+{% block title %}
+    新建/编辑
+{% endblock %}
+
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'editormd/css/editormd.min.css' %}"/>

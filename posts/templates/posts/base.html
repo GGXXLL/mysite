@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Title{% endblock %}</title>
+    <title>{% block title %}{%  firstof title select_part.name '首页' %}{% endblock %}</title>
     {% block css %}
         {#        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">#}
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">

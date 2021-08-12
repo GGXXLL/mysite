@@ -78,6 +78,7 @@ class PostSelfView(LoginRequiredMixin, generic.ListView):
         if q != "":
             extra_args += f"&q={q}"
         context['extra_args'] = extra_args
+        context["title"] = "我的帖子"
         return context
 
 
